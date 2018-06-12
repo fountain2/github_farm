@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db>
+	<driver-name>com.mysql.jdbc.Driver</driver-name>
+	<url>jdbc:mysql://localhost:3306/farmer</url>
+	<user-name>root</user-name>
+	<user-password>1234</user-password>
+</db>
