@@ -8,6 +8,10 @@ import com.echarts.client.bean.Message;
 import com.echarts.client.bean.twicepack.FarmViewBean;
 import com.echarts.util.IOperation;
 
+/**
+ *	业务逻辑层 
+ *
+ */
 public class ServerServiceImpl extends Thread{
 	private Socket socket;
 	private ObjectInputStream objis;
@@ -36,24 +40,30 @@ public class ServerServiceImpl extends Thread{
 				//登录页面
 			case IOperation.LOGINVIEW:
 				break;
+				
 				//注册页面
 			case IOperation.REGISTERVIEW:
 				break;
+				
 				//农场页面
 			case IOperation.FARMVIEW:
 				FarmViewBean farmViewBean = message.getFarmViewBean();
 				//进行操作
 				
 				break;
+				
 				//其他农场页面
 			case IOperation.OTHERFARMVIEW:
 				break;
+				
 				//仓库页面
 			case IOperation.REPOSITORYVIEW:
 				break;
+				
 				//商店页面
 			case IOperation.SHOPVIEW:
 				break;
+				
 				//设置页面
 			case IOperation.CONFIGVIEW:
 				break;

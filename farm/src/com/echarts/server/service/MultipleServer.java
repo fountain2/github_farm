@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+/**
+ * 服务器入口
+ */
 public class MultipleServer {
 
 	public static void main(String[] args) {
