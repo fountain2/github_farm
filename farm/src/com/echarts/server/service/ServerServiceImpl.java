@@ -8,13 +8,13 @@ import com.echarts.client.bean.Message;
 import com.echarts.client.bean.twicepack.FarmViewBean;
 import com.echarts.util.IOperation;
 
-public class ServerService extends Thread{
+public class ServerServiceImpl extends Thread{
 	private Socket socket;
 	private ObjectInputStream objis;
 	private ObjectOutputStream objos;
 	
 	
-	public ServerService(Socket socket) {
+	public ServerServiceImpl(Socket socket) {
 		this.socket = socket;
 	}
 	
