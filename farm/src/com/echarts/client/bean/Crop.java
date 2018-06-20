@@ -1,6 +1,8 @@
 package com.echarts.client.bean;
 
-public class Crop {
+import java.io.Serializable;
+
+public class Crop implements Serializable{
     private Integer cropId;
 
     private String cropName;

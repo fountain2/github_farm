@@ -138,15 +138,15 @@ public class OtherFarmView extends JFrame {
 	/**
 	 * 测试用的主方法，使用OtherFarmView类时需要先实例化
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					OtherFarmView frame = new OtherFarmView(1,2);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					OtherFarmView frame = new OtherFarmView(1,2);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 }

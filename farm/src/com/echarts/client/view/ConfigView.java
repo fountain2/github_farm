@@ -128,15 +128,15 @@ public class ConfigView extends JFrame {
 	/**
 	 * 测试用的主方法，使用ConfigView类时需要先实例化
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ConfigView frame = new ConfigView(1);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					ConfigView frame = new ConfigView(1);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 }

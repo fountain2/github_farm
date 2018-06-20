@@ -1,5 +1,8 @@
 package com.echarts.client.controller;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 /**
  * 1、仓库按钮( new Repository(xxx).init()) 
  * 2、商城按钮( new Shop(xxx).init()) 
@@ -10,6 +13,13 @@ package com.echarts.client.controller;
  * 6、土地按钮( showmessage )	有指定效果
  *
  */
-public class FarmViewController {
+public class FarmViewController implements ActionListener{
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+	}
+	
+	
 	
 }

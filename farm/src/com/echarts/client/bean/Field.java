@@ -1,8 +1,9 @@
 package com.echarts.client.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Field {
+public class Field implements Serializable{
     private Integer fieldId;
 
     private Integer userId;

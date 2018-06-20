@@ -1,6 +1,8 @@
 package com.echarts.client.bean;
 
-public class Seed {
+import java.io.Serializable;
+
+public class Seed implements Serializable{
     private Integer seedId;
 
     private String seedName;

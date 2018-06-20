@@ -93,6 +93,7 @@ public class LoginView extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("测试-登录按钮");
+				new FarmView(1);
 			}
 		});
 		registerButton.addActionListener(new ActionListener() {// 注册按钮的点击事件

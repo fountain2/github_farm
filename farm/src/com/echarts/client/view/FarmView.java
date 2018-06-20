@@ -13,8 +13,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import com.echarts.client.bean.User;
 
 /**
  * 
@@ -29,11 +30,12 @@ public class FarmView extends JFrame {
 	 */
 	public FarmView(int userID) {
 		// 需通过用户ID获取用户的各项信息，分别赋给对应的组件
+//		User user = new 
 
 		// 赋给各个组件的变量暂定如下，根据需要自行修改
-		int farmLV = 1;// 农场等级
-		int userMoney = 0;// 用户金币
-		String userName = "www";// 用户名
+		int farmLV = 3;// 农场等级
+		int userMoney = 1100;// 用户金币
+		String userName = "foun";// 用户名
 		String userMessage = "你好," + userName + "，欢迎回到农场(LV" + farmLV + ")";// 画面左上角的显示信息
 		int[] plantNumber = new int[15];// 十五个土地的植物的标号，用户的土地情况遍历完存入该数组即可使用
 										// 若植物未生长完成则设置为-1，没有种植则设置为0，默认为0
@@ -167,6 +169,7 @@ public class FarmView extends JFrame {
 		toOtherFarmButton.addActionListener(new ActionListener() {// 访问农场按钮的点击事件
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				new OtherFarmView(userID, 2);
 				System.out.println("测试-访问农场按钮");
 			}
 		});

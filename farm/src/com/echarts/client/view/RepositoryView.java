@@ -220,16 +220,16 @@ public class RepositoryView extends JFrame {
 	/**
 	 * 测试用的主方法，使用RepositoryView类时需要先实例化
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					RepositoryView frame = new RepositoryView(1);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					RepositoryView frame = new RepositoryView(1);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 }

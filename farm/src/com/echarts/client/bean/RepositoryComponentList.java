@@ -1,12 +1,14 @@
 package com.echarts.client.bean;
 
+import java.io.Serializable;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
 /**
  * 仓库界面中显示物品列表所要用到的组件类
  */
-public class RepositoryComponentList {
+public class RepositoryComponentList implements Serializable{
 	private JLabel itemID;// 物品的id
 	private JLabel itemName;// 物品的名称
 	private JLabel itemType;// 物品的类型

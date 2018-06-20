@@ -1,6 +1,8 @@
 package com.echarts.client.bean;
 
-public class Repository {
+import java.io.Serializable;
+
+public class Repository implements Serializable{
     private Integer resId;
 
     private Integer userId;
