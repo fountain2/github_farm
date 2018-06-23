@@ -17,6 +17,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import com.echarts.client.controller.UserController;
+
 /**
  * 
  * 注册页面
@@ -98,12 +100,10 @@ public class RegisterView extends JFrame {
 		// 注册按钮的要求：成功注册时，弹出注册成功的消息框，之后跳转到登录页面LoginView
 		// 返回按钮的跳转已完成，可以不改动
 		// 具体根据需要自行修改
-		registerButton.addActionListener(new ActionListener() {// 注册按钮的点击事件
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("测试-注册按钮");
-			}
-		});
+		
+		// 注册按钮的点击事件
+		registerButton.addActionListener(new UserController(userNameField, userPasswordField1, userPasswordField2, registerButton, this));
+		
 		backButton.addActionListener(new ActionListener() {// 返回按钮的点击事件
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -116,16 +116,16 @@ public class RegisterView extends JFrame {
 	/**
 	 * 测试用的主方法，使用RegisterView类时需要先实例化
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					RegisterView frame = new RegisterView();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					RegisterView frame = new RegisterView();
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 }

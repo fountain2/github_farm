@@ -56,7 +56,7 @@ public class FarmView extends JFrame {
 					}
 				}
 			};
-			timer.schedule(timeTask, 10000L, 10000L);
+			timer.schedule(timeTask, 30000L, 30000L);
 		} catch (ClassNotFoundException | IOException e1) {
 			e1.printStackTrace();
 		}
@@ -284,7 +284,6 @@ public class FarmView extends JFrame {
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				} catch (ClassNotFoundException e1) {
-					e1.printStackTrace();
 				}
 			}
 		});
@@ -300,15 +299,15 @@ public class FarmView extends JFrame {
 	/**
 	 * 测试用的主方法，使用FarmView类时需要先实例化
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					FarmView frame = new FarmView(3);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					FarmView frame = new FarmView(3);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 }

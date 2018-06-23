@@ -12,10 +12,14 @@ import com.echarts.client.bean.Seed;
 import com.echarts.client.bean.User;
 import com.echarts.client.bean.twicepack.ConfigViewBean;
 import com.echarts.client.bean.twicepack.FarmViewBean;
+import com.echarts.client.bean.twicepack.LoginViewBean;
+import com.echarts.client.bean.twicepack.RegisterViewBean;
 import com.echarts.client.bean.twicepack.RepositoryViewBean;
 import com.echarts.client.bean.twicepack.ShopViewBean;
 import com.echarts.server.dao.impl.ConfigViewDaoImpl;
 import com.echarts.server.dao.impl.FarmViewDao;
+import com.echarts.server.dao.impl.LoginViewDao;
+import com.echarts.server.dao.impl.RegisterViewDao;
 import com.echarts.server.dao.impl.RepositoryDaoImpl;
 import com.echarts.server.dao.impl.ShopViewDaoImpl;
 import com.echarts.util.IOperation;
@@ -51,10 +55,28 @@ public class ServerServiceImpl extends Thread{
 			
 				//登录页面
 			case IOperation.LOGINVIEW:
+				LoginViewBean loginViewBean = message.getLoginViewBean();
+				User userLogin = loginViewBean.getUser();
+				LoginViewDao loginViewDao = new LoginViewDao();
+				User userLoginBack = loginViewDao.login(userLogin);
+				objos.writeObject(userLoginBack);
+				objos.flush();
 				break;
 				
 				//注册页面
 			case IOperation.REGISTERVIEW:
+				RegisterViewBean registerViewBean = message.getRegisterViewBean();
+				String operation = registerViewBean.getOperation();
+				if(operation.equals("query")) {
+					User user = registerViewBean.getUser();
+					RegisterViewDao registerViewDao = new RegisterViewDao();
+					User userBack = registerViewDao.queryUser(user.getUserName());
+					objos.writeObject(userBack);
+					objos.flush();
+				}else {
+					User userRegister = registerViewBean.getUser();
+					new RegisterViewDao().registerUser(userRegister);
+				}
 				break;
 				
 				//农场页面

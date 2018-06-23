@@ -17,6 +17,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import com.echarts.client.controller.LoginController;
+
 /**
  * 
  * 登录页面
@@ -89,13 +91,8 @@ public class LoginView extends JFrame {
 		// 登录按钮的要求：成功登录（即数据库存在该用户）时，跳转到农场页面FarmView，并传递该用户的ID给FarmView
 		// 注册按钮的跳转已完成，可以不改动
 		// 具体根据需要自行修改
-		loginButton.addActionListener(new ActionListener() {// 登录按钮的点击事件
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("测试-登录按钮");
-//				new FarmView(1);
-			}
-		});
+		// 登录按钮的点击事件
+		loginButton.addActionListener(new LoginController(this, userNameField, userPasswordField, loginButton));
 		registerButton.addActionListener(new ActionListener() {// 注册按钮的点击事件
 			@Override
 			public void actionPerformed(ActionEvent e) {
