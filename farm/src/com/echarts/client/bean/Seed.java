@@ -16,60 +16,86 @@ public class Seed implements Serializable{
     private Integer cropId;
 
     private String seedIntroduction;
+    
+    private Integer seedNumber;
 
-    public Integer getSeedId() {
-        return seedId;
-    }
+    public Seed() {
+	}
 
-    public void setSeedId(Integer seedId) {
-        this.seedId = seedId;
-    }
+	public Seed(Integer seedId, String seedName, Integer seedPrice, Integer seedHarvestNumber, Integer seedHarvestTime,
+			Integer cropId, String seedIntroduction) {
+		this.seedId = seedId;
+		this.seedName = seedName;
+		this.seedPrice = seedPrice;
+		this.seedHarvestNumber = seedHarvestNumber;
+		this.seedHarvestTime = seedHarvestTime;
+		this.cropId = cropId;
+		this.seedIntroduction = seedIntroduction;
+	}
 
-    public String getSeedName() {
-        return seedName;
-    }
+	
+	public Integer getSeedId() {
+		return seedId;
+	}
 
-    public void setSeedName(String seedName) {
-        this.seedName = seedName == null ? null : seedName.trim();
-    }
+	public void setSeedId(Integer seedId) {
+		this.seedId = seedId;
+	}
 
-    public Integer getSeedPrice() {
-        return seedPrice;
-    }
+	public String getSeedName() {
+		return seedName;
+	}
 
-    public void setSeedPrice(Integer seedPrice) {
-        this.seedPrice = seedPrice;
-    }
+	public void setSeedName(String seedName) {
+		this.seedName = seedName == null ? null : seedName.trim();
+	}
 
-    public Integer getSeedHarvestNumber() {
-        return seedHarvestNumber;
-    }
+	public Integer getSeedPrice() {
+		return seedPrice;
+	}
 
-    public void setSeedHarvestNumber(Integer seedHarvestNumber) {
-        this.seedHarvestNumber = seedHarvestNumber;
-    }
+	public void setSeedPrice(Integer seedPrice) {
+		this.seedPrice = seedPrice;
+	}
 
-    public Integer getSeedHarvestTime() {
-        return seedHarvestTime;
-    }
+	public Integer getSeedHarvestNumber() {
+		return seedHarvestNumber;
+	}
 
-    public void setSeedHarvestTime(Integer seedHarvestTime) {
-        this.seedHarvestTime = seedHarvestTime;
-    }
+	public void setSeedHarvestNumber(Integer seedHarvestNumber) {
+		this.seedHarvestNumber = seedHarvestNumber;
+	}
 
-    public Integer getCropId() {
-        return cropId;
-    }
+	public Integer getSeedHarvestTime() {
+		return seedHarvestTime;
+	}
 
-    public void setCropId(Integer cropId) {
-        this.cropId = cropId;
-    }
+	public void setSeedHarvestTime(Integer seedHarvestTime) {
+		this.seedHarvestTime = seedHarvestTime;
+	}
 
-    public String getSeedIntroduction() {
-        return seedIntroduction;
-    }
+	public Integer getCropId() {
+		return cropId;
+	}
 
-    public void setSeedIntroduction(String seedIntroduction) {
-        this.seedIntroduction = seedIntroduction == null ? null : seedIntroduction.trim();
-    }
+	public void setCropId(Integer cropId) {
+		this.cropId = cropId;
+	}
+
+	public String getSeedIntroduction() {
+		return seedIntroduction;
+	}
+
+	public void setSeedIntroduction(String seedIntroduction) {
+		this.seedIntroduction = seedIntroduction == null ? null : seedIntroduction.trim();
+	}
+
+	public Integer getSeedNumber() {
+		return seedNumber;
+	}
+
+	public void setSeedNumber(Integer seedNumber) {
+		this.seedNumber = seedNumber;
+	}
+
 }

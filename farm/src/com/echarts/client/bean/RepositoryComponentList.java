@@ -17,6 +17,8 @@ public class RepositoryComponentList implements Serializable{
 	private JLabel itemPrice;// 物品的售价
 	private JButton useButton;// 使用按钮
 	private JButton sellButton;// 出售按钮
+	private int resGoodsID;//物品在谷物里或种子里的id
+	private int resID;//仓库id
 
 	// 构造方法：实例化各个组件
 	public RepositoryComponentList() {
@@ -61,6 +63,22 @@ public class RepositoryComponentList implements Serializable{
 
 	public JButton getSellButton() {
 		return sellButton;
+	}
+
+	public int getResGoodsID() {
+		return resGoodsID;
+	}
+
+	public void setResGoodsID(int resGoodsID) {
+		this.resGoodsID = resGoodsID;
+	}
+
+	public int getResID() {
+		return resID;
+	}
+
+	public void setResID(int resID) {
+		this.resID = resID;
 	}
 
 }

@@ -17,8 +17,24 @@ public class User implements Serializable{
     private Integer userType;
 
     private Date userAccesstime;
+    
+    
 
-    public Integer getUserId() {
+    public User() {
+	}
+
+	public User(Integer userId, String userName, String userPaswword, Integer userLv, Integer userMoney,
+			Integer userType, Date userAccesstime) {
+		this.userId = userId;
+		this.userName = userName;
+		this.userPaswword = userPaswword;
+		this.userLv = userLv;
+		this.userMoney = userMoney;
+		this.userType = userType;
+		this.userAccesstime = userAccesstime;
+	}
+
+	public Integer getUserId() {
         return userId;
     }
 

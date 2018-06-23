@@ -16,6 +16,9 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 
+import com.echarts.client.controller.ConfigController;
+
+
 /**
  * 
  * 设置页面
@@ -102,13 +105,9 @@ public class ConfigView extends JFrame {
 		// 按钮的监听事件（注：按钮的点击事件的具体方法应写在controller层，这里仅作测试用）
 		// 修改密码按钮的要求：密码修改成功时，弹出修改成功的消息框，之后清空所有输入框
 		// 切换账户按钮和返回农场按钮的跳转已实现，可以不改动
-		// 具体根据需要自行修改
-		changePasswordButton.addActionListener(new ActionListener() {// 修改密码按钮的点击事件
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("测试-修改密码按钮");
-			}
-		});
+		// 具体根据需要自行修改		
+		changePasswordButton.addActionListener(new ConfigController(oldPasswordField, newPasswordField1, newPasswordField2, changePasswordButton,userID));// 修改密码按钮的点击事件
+		
 		changeUserButton.addActionListener(new ActionListener() {// 切换账户按钮的点击事件
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -128,15 +127,15 @@ public class ConfigView extends JFrame {
 	/**
 	 * 测试用的主方法，使用ConfigView类时需要先实例化
 	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					ConfigView frame = new ConfigView(1);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ConfigView frame = new ConfigView(4);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 }

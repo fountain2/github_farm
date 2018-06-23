@@ -16,7 +16,21 @@ public class Field implements Serializable{
 
     private Date fieldPlantingTime;
 
-    public Integer getFieldId() {
+    
+    public Field() {
+	}
+
+	public Field(Integer fieldId, Integer userId, Integer seedId, Integer fieldStatus, Integer filedHarvestNumber,
+			Date fieldPlantingTime) {
+		this.fieldId = fieldId;
+		this.userId = userId;
+		this.seedId = seedId;
+		this.fieldStatus = fieldStatus;
+		this.filedHarvestNumber = filedHarvestNumber;
+		this.fieldPlantingTime = fieldPlantingTime;
+	}
+
+	public Integer getFieldId() {
         return fieldId;
     }
 

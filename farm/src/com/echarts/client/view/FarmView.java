@@ -6,6 +6,14 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -15,7 +23,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.echarts.client.bean.Field;
+import com.echarts.client.bean.Seed;
 import com.echarts.client.bean.User;
+import com.echarts.client.controller.FarmViewController;
+import com.echarts.client.model.FarmModel;
 
 /**
  * 
@@ -24,21 +36,75 @@ import com.echarts.client.bean.User;
 public class FarmView extends JFrame {
 
 	private JPanel contentPane;
-
+	private Timer timer;
+	private Timer timerPlants;
+	
+	public FarmView(int userID){
+		try {
+			//先初始化一次
+			timerFarmView(userID);
+			//设置定时刷新
+			timer = new Timer();
+			TimerTask timeTask = new TimerTask() {
+				@Override
+				public void run() {
+					try {
+						timerPlants.cancel();
+						timerFarmView(userID);
+					} catch (ClassNotFoundException | IOException e) {
+						e.printStackTrace();
+					}
+				}
+			};
+			timer.schedule(timeTask, 10000L, 10000L);
+		} catch (ClassNotFoundException | IOException e1) {
+			e1.printStackTrace();
+		}
+	}
+	
 	/**
-	 * FarmView的构造方法，实例化时将生成一个农场界面，需用户ID作为参数
+	 * 实例化时将生成一个农场界面，需用户ID作为参数
+	 * @throws IOException 
+	 * @throws UnknownHostException 
+	 * @throws ClassNotFoundException 
 	 */
-	public FarmView(int userID) {
+	public void timerFarmView(int userID) throws ClassNotFoundException, UnknownHostException, IOException {
 		// 需通过用户ID获取用户的各项信息，分别赋给对应的组件
-//		User user = new 
+		User user = new FarmModel().initFarmData(userID);
 
 		// 赋给各个组件的变量暂定如下，根据需要自行修改
-		int farmLV = 3;// 农场等级
-		int userMoney = 1100;// 用户金币
-		String userName = "foun";// 用户名
+		int farmLV = user.getUserLv();// 农场等级
+		int userMoney = user.getUserMoney();// 用户金币
+		String userName = user.getUserName();// 用户名
 		String userMessage = "你好," + userName + "，欢迎回到农场(LV" + farmLV + ")";// 画面左上角的显示信息
 		int[] plantNumber = new int[15];// 十五个土地的植物的标号，用户的土地情况遍历完存入该数组即可使用
 										// 若植物未生长完成则设置为-1，没有种植则设置为0，默认为0
+		List<Field> fieldList = new FarmModel().queryField(userID);
+		List<Seed> seedList = new ArrayList<>();
+		int z =0;
+		Seed seed;
+		for (Field field : fieldList) {
+			seed = new FarmModel().querySeed(field);
+			seedList.add(seed);
+			
+			//当前时间
+			long ntime = new Date().getTime();
+			long htime = field.getFieldPlantingTime().getTime()+seed.getSeedHarvestTime()*60*1000;
+			//判断当前时间是否超过或者等于成熟的时间
+			if (ntime >= htime) {
+				if (field.getFieldStatus()!=0) {
+					plantNumber[z] = seed.getCropId();
+					//修改状态代码
+					new FarmModel().updateFieldStatus(field,1);
+				}
+			}else{
+				if (field.getFieldStatus()== -1) {
+					plantNumber[z] = -1;
+				}
+			}
+			z++;
+		}
+		
 
 		// 以下是绘制画面的相关代码——————————————————————————————————————————
 		// 设置窗口（即父类JFrame）的各项属性和状态
@@ -99,32 +165,34 @@ public class FarmView extends JFrame {
 		JButton[] area = new JButton[15];// 土地按钮
 		Icon[] plant = new ImageIcon[15];// 植物图标
 		for (int i = 0; i < 15; i++) {
-			plant[i] = new ImageIcon("img\\Plants\\Plants_" + plantNumber[i] + ".png");// 根据各土地的植物标号
+			plant[i] = new ImageIcon("img\\Plants\\Plants_" + plantNumber[i] + "_"+1+"_test.png");// 根据各土地的植物标号
 			area[i] = new JButton(plant[i]);// 把植物图标给土地按钮
 		}
+		
+		
 		// 属性设置
 		switch (farmLV) {
 		case 6:
 			for (int i = 12; i <= 14; i++) {
-				area[i].setBounds(612, 184 + (i - 12) * 116, 100, 100);
+				area[i].setBounds(612, 154 + (i - 12) * 116, 100, 100);
 			}
 		case 5:
-			area[10].setBounds(372, 416, 100, 100);
-			area[11].setBounds(492, 416, 100, 100);
+			area[10].setBounds(372, 386, 100, 100);
+			area[11].setBounds(492, 386, 100, 100);
 		case 4:
-			area[8].setBounds(492, 184, 100, 100);
-			area[9].setBounds(492, 300, 100, 100);
+			area[8].setBounds(492, 154, 100, 100);
+			area[9].setBounds(492, 270, 100, 100);
 		case 3:
-			area[6].setBounds(372, 184, 100, 100);
-			area[7].setBounds(372, 300, 100, 100);
+			area[6].setBounds(372, 154, 100, 100);
+			area[7].setBounds(372, 270, 100, 100);
 		case 2:
-			area[4].setBounds(132, 416, 100, 100);
-			area[5].setBounds(252, 416, 100, 100);
+			area[4].setBounds(132, 386, 100, 100);
+			area[5].setBounds(252, 386, 100, 100);
 		case 1:
-			area[0].setBounds(132, 184, 100, 100);
-			area[1].setBounds(252, 184, 100, 100);
-			area[2].setBounds(132, 300, 100, 100);
-			area[3].setBounds(252, 300, 100, 100);
+			area[0].setBounds(132, 154, 100, 100);
+			area[1].setBounds(252, 154, 100, 100);
+			area[2].setBounds(132, 270, 100, 100);
+			area[3].setBounds(252, 270, 100, 100);
 		}
 		for (int i = 0; i < 15; i++) {
 			area[i].setContentAreaFilled(false);
@@ -142,20 +210,44 @@ public class FarmView extends JFrame {
 		// 显示界面窗口
 		setContentPane(contentPane);
 		setVisible(true);
+		
+		
+		// 动画测试
+		timerPlants= new Timer();
+		TimerTask task = new TimerTask() {
+			int test = 1;
+			public void run() {
+				for (int i = 0; i < 15; i++) {
+					area[i].setIcon(new ImageIcon("img\\Plants\\Plants_" + plantNumber[i] + "_"+test+".png"));
+				}
+				test++;
+				if(test>4)
+					test=1;
+			}
+		};
+		timerPlants.schedule(task, 200L, 100L);
 
 		// 按钮的监听事件（注：按钮的点击事件的具体方法应写在controller层，这里仅作测试用）
 		// 具体根据需要自行修改
 		toRepositoryButton.addActionListener(new ActionListener() {// 仓库按钮的点击事件
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new RepositoryView(userID);
-				dispose();
+				try {
+					new RepositoryView(userID);
+					timer.cancel();
+					timerPlants.cancel();
+					dispose();
+				} catch (ClassNotFoundException | IOException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 		toShopButton.addActionListener(new ActionListener() {// 商城按钮的点击事件
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new ShopView(userID);
+				timer.cancel();
+				timerPlants.cancel();
 				dispose();
 			}
 		});
@@ -163,24 +255,46 @@ public class FarmView extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new ConfigView(userID);
+				timer.cancel();
+				timerPlants.cancel();
 				dispose();
 			}
 		});
 		toOtherFarmButton.addActionListener(new ActionListener() {// 访问农场按钮的点击事件
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new OtherFarmView(userID, 2);
-				System.out.println("测试-访问农场按钮");
+				try {
+					List<User> userlist = new FarmModel().queryUserList();
+					List<Integer> userIdList = new ArrayList<>();
+					for (User user : userlist) {
+						userIdList.add(user.getUserId());
+					}
+					Random random = new Random();
+					while(true) {
+						int rannum =random.nextInt(userIdList.size());
+						int toUserId = userIdList.get(rannum);
+						if (toUserId != userID) {
+							new OtherFarmView(userID, toUserId);
+							timer.cancel();
+							timerPlants.cancel();
+							break;
+						}
+					}
+					dispose();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				} catch (ClassNotFoundException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
+		
+		//土地按钮监听
 		for (int i = 0; i < 15; i++) {
-			area[i].addActionListener(new ActionListener() {// 土地的点击事件
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					System.out.println("测试-土地按钮");
-				}
-			});
+			final int number = i;
+			area[i].addActionListener(new FarmViewController(FarmView.this,number,plantNumber,fieldList,seedList,area[i]));
 		}
+		
 	}
 
 	/**
@@ -190,7 +304,7 @@ public class FarmView extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					FarmView frame = new FarmView(1);
+					FarmView frame = new FarmView(3);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

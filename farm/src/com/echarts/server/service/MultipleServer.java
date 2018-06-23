@@ -12,10 +12,10 @@ public class MultipleServer {
 	public static void main(String[] args) {
 		try {
 			ServerSocket serverSocket = new ServerSocket(9999);
+			System.out.println("¿ªÆô·þÎñÆ÷");
 			
 			while(true){
 				Socket socket = serverSocket.accept();
-				
 				ServerServiceImpl serverService = new ServerServiceImpl(socket);
 				serverService.start();
 			}
